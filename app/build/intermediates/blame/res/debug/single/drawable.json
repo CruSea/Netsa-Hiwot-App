@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/Yared/Netsa-Hiwot-App1/app/build/intermediates/res/merged/debug/drawable/actionbar_shadow.xml",
+        "source": "/Users/Yared/Netsa-Hiwot-App1/app/src/main/res/drawable/actionbar_shadow.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa-Hiwot-App1/app/build/intermediates/res/merged/debug/drawable/navigation_drawer_shadow.xml",
+        "source": "/Users/Yared/Netsa-Hiwot-App1/app/src/main/res/drawable/navigation_drawer_shadow.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa Hiwot App New/app/build/intermediates/res/merged/debug/drawable/actionbar_shadow.xml",
+        "source": "/Users/Yared/Netsa Hiwot App New/app/src/main/res/drawable/actionbar_shadow.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa-Hiwot-App1/app/build/intermediates/res/merged/debug/drawable/actionbar_icon_placeholder_compat.xml",
+        "source": "/Users/Yared/Netsa-Hiwot-App1/app/src/main/res/drawable/actionbar_icon_placeholder_compat.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa Hiwot App New/app/build/intermediates/res/merged/debug/drawable/navigation_drawer_shadow.xml",
+        "source": "/Users/Yared/Netsa Hiwot App New/app/src/main/res/drawable/navigation_drawer_shadow.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa Hiwot App New/app/build/intermediates/res/merged/debug/drawable/actionbar_icon_placeholder_compat.xml",
+        "source": "/Users/Yared/Netsa Hiwot App New/app/src/main/res/drawable/actionbar_icon_placeholder_compat.xml"
+    }
+]

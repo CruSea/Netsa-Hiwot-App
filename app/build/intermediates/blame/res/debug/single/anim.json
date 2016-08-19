@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "/Users/Yared/Netsa-Hiwot-App1/app/build/intermediates/res/merged/debug/anim/close_next.xml",
+        "source": "/Users/Yared/Netsa-Hiwot-App1/app/src/main/res/anim/close_next.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa-Hiwot-App1/app/build/intermediates/res/merged/debug/anim/close_main.xml",
+        "source": "/Users/Yared/Netsa-Hiwot-App1/app/src/main/res/anim/close_main.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa Hiwot App New/app/build/intermediates/res/merged/debug/anim/close_main.xml",
+        "source": "/Users/Yared/Netsa Hiwot App New/app/src/main/res/anim/close_main.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa Hiwot App New/app/build/intermediates/res/merged/debug/anim/open_main.xml",
+        "source": "/Users/Yared/Netsa Hiwot App New/app/src/main/res/anim/open_main.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa-Hiwot-App1/app/build/intermediates/res/merged/debug/anim/open_next.xml",
+        "source": "/Users/Yared/Netsa-Hiwot-App1/app/src/main/res/anim/open_next.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa Hiwot App New/app/build/intermediates/res/merged/debug/anim/open_next.xml",
+        "source": "/Users/Yared/Netsa Hiwot App New/app/src/main/res/anim/open_next.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa-Hiwot-App1/app/build/intermediates/res/merged/debug/anim/open_main.xml",
+        "source": "/Users/Yared/Netsa-Hiwot-App1/app/src/main/res/anim/open_main.xml"
+    },
+    {
+        "merged": "/Users/Yared/Netsa Hiwot App New/app/build/intermediates/res/merged/debug/anim/close_next.xml",
+        "source": "/Users/Yared/Netsa Hiwot App New/app/src/main/res/anim/close_next.xml"
+    }
+]
