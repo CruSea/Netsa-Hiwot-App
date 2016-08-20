@@ -39,8 +39,18 @@
 	<string name="menu_contact">Contact Us</string>
 	<string name="menu_about">About Us</string>
 	<string name="menu_share">Share</string>
+    <string name="first_name">First_name</string>
+    <string name="last_name">Last_name</string>
+    <string name="sex">Sex</string>
+    <string name="email">Email</string>
+    <string name="First_name">First Name</string>
+    <string name="Last_name">Last Name</string>
+    <string name="message">Email</string>
+    <string name="Sex">Sex</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="age_range">Age Range :</string>
 
-     
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item>Home</item>

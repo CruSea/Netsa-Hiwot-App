@@ -10,11 +10,23 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        <item name="android:dropDownSelector">#ff6600</item>
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    <string-array name="Age">
+        <item>Select yor Age</item>
+        <item>4-10  </item>
+        <item>11-18 teenager</item>
+        <item>19-24 young</item>
+        <item>25-35 youth</item>
+        <item>36-45 youth Adult </item>
+        <item>45-55 Adult</item>
+        <item>above 55 old</item>
+
+    </string-array>
     
 </resources>
