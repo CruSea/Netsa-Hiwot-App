@@ -2,6 +2,8 @@ package com.netsahiwot.netsa_hiwot;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,13 +15,18 @@ public class ActivityTestimonies extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.testimonies);
+        //setContentView(R.layout.testimonies);
         
         ActionBar bar = getActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.header)));
         bar.setDisplayHomeAsUpEnabled(true);
         bar.setTitle("Testimonies");
-        
+
+		FragmentManager fragmentManager = getFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(android.R.id.content, new TestimoniesFragment());
+		fragmentTransaction.commit();
+
     }
     
     @Override
