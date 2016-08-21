@@ -76,5 +76,8 @@
         <item>@drawable/ic_share</item>
     </array>
 
-	
+	<string name="contact">
+      We are here to answer any question or comment you may have about our app or our ministry.
+        Reach out to us and we will respond as soon as we can.
+    </string>
 </resources>

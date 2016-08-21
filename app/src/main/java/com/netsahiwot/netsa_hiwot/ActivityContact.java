@@ -2,13 +2,20 @@ package com.netsahiwot.netsa_hiwot;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class ActivityContact extends Activity {
+    EditText Name,Email,Message;
+    Button Send;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +26,32 @@ public class ActivityContact extends Activity {
         bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.header)));
         bar.setTitle("Contact Us");
         bar.setDisplayHomeAsUpEnabled(true);
+
+        Name=(EditText)findViewById(R.id.FullName);
+        Email=(EditText)findViewById(R.id.CEail);
+        Message=(EditText)findViewById(R.id.textbody);
+        Send=(Button)findViewById(R.id.send);
+    Send.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String message= "Full Name:-" + Name.getText().toString() +"\n"+ "Message:-"  + Message .getText().toString();
+            sendEmail(message);
+        }
+    });
+
     }
+    protected void sendEmail(String message) {
+        String[] array = new String[]{"azewdu87@gmail.com"};
+        String subject = ("Hi Netsa Hiwot ");
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, array);//reciver
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);// message subject
+        emailIntent.putExtra(Intent.EXTRA_TEXT, message);//
+        emailIntent.setType("message/rfc822");
+        startActivity(Intent.createChooser(emailIntent, "Email"));
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

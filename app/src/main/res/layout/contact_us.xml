@@ -1,41 +1,142 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:fillViewport="false">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="clip_horizontal"
+                android:text="@string/contact"
+                android:textSize="16dp"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
 
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Full Name:-"/>
+                <EditText
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/FullName"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email:-"/>
+                <EditText
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/CEail"
+                    android:layout_marginLeft="22dp"
+                    android:hint="example@example.com"/>
+
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="280dp"
+                android:layout_height="100dp"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/textbody"
+                android:maxHeight="100dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="top"
+                android:background="@drawable/boarder"
+                android:hint="write your message here"
+                android:paddingLeft="5dp"
+                />
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/header"
+                android:gravity="center"
+                android:onClick="SendBtn"
+                android:text="Send"
+                android:textColor="#ffffff"
+                android:textSize="16dp" />
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_marginTop="10dp"
+              >
+              <ImageView
+                  android:layout_width="30dp"
+                  android:layout_height="30dp"
+                  android:background="@drawable/email"/>
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="NetsaHiwot@gmail.com"
+                  android:layout_marginTop="12dp"
+                  android:paddingLeft="10dp"
+                  android:textSize="15sp"/>
+          </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp">
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/phone"/>
     <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:gravity="center_horizontal"
-        android:text="Contact Us"
-        android:textSize="16dp" />
+        android:text="+251920458081"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="10dp"
+        android:textSize="15sp"/>
+</LinearLayout>
 
-    <EditText
-        android:id="@+id/body"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:ems="10"
-        android:gravity="top"
-        android:hint="Your text here.."
-        android:textSize="14dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/website"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="www.NetsaHiwot.com"
+                    android:layout_marginTop="8dp"
+                    android:paddingLeft="10dp"
+                    android:textSize="15sp"/>
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/send"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/header"
-        android:gravity="center"
-        android:onClick="SendBtn"
-        android:text="Send"
-        android:textColor="#ffffff"
-        android:textSize="16dp" />
 
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
