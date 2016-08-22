@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 /**
  * Created by Sammie on 8/20/2016.
  */
-public class CRUD_Frag extends Fragment {
+public class Read_Frag extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.crud_frag, container, false);
+        return inflater.inflate(R.layout.temp_frag, container, false);
     }
 }

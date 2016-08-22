@@ -4,21 +4,27 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
 
+import com.astuetz.PagerSlidingTabStrip;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 public class ActivityTempted extends FragmentActivity {
 
     ViewPager pager;
-    TabHost host;
+    PagerSlidingTabStrip tabStrip;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,36 +34,11 @@ public class ActivityTempted extends FragmentActivity {
         bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.header)));
         bar.setTitle("Tempted");
         bar.setDisplayHomeAsUpEnabled(true);
-        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-            @Override
-            public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
-
-            }
-
-            @Override
-            public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
-
-            }
-
-            @Override
-            public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
-
-            }
-        };
-
-        // Add 3 tabs, specifying the tab's text and TabListener
-        for (int i = 0; i < 2; i++) {
-            bar.addTab(
-                    bar.newTab()
-                            .setText("Tab " + (i + 1))
-                            .setTabListener(tabListener));
-        }
-
 
         pager = (ViewPager) findViewById(R.id.pager);
+        tabStrip = (PagerSlidingTabStrip)findViewById(R.id.tabs);
         pager.setAdapter(new VPAdapter(getSupportFragmentManager(), getApplicationContext()));
-
+        tabStrip.setViewPager(pager);
     }
 
     @Override
@@ -101,33 +82,4 @@ public class ActivityTempted extends FragmentActivity {
         super.onConfigurationChanged(newConfig);
     }
 
-    private class VPAdapter extends FragmentPagerAdapter {
-        private String fragments[] = {"CRUD_Frag", ""};
-
-        public VPAdapter(FragmentManager supportFragmentManager, Context applicationContext) {
-            super(supportFragmentManager);
-        }
-
-        @Override
-        public Fragment getItem(int postion) {
-            switch (postion) {
-                case 0:
-                    return new CRUD_Frag();
-                case 1:
-                    return new Temp_Frag();
-                default:
-                    return new Temp_Frag();
-            }
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return fragments[position];
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.length;
-        }
-    }
 }
