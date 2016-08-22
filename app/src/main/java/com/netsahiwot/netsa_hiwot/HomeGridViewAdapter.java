@@ -51,31 +51,31 @@ public class HomeGridViewAdapter extends BaseAdapter {
         imgv.setScaleType(ImageView.ScaleType.CENTER_CROP);
         txv.setText("A sample paragraph to test the home layout textview and the above image is "
                 + str[position]);
-/*
+
         imgv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               starter(postion + 1);
+               starter(position + 1);
             }
         });
         txv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            starter(postion + 1);
+            starter(position + 1);
             }
         });
-*/
+
         return view;
     }
-/*
-    void starter(int postion) {
-        starter(true);
-        Intent startArticleActivity = new Intent(cntx, ActivityArticle.class);
-        startArticleActivity.putExtra("Resource", "img" + (position));
+
+    void starter(int position) {
+       // starter(true);
+        Intent startArticleActivity = new Intent(cntx, ActivityArticles.class);
+        startArticleActivity.putExtra("Image", "img" + (position));
         startArticleActivity.putExtra("Txt", "Amanstext" + (position));
+        startArticleActivity.putExtra("Title",Titles[position -1]);
         cntx.startActivity(startArticleActivity);
     }
-*/
     private String str[] = {"Image 1", "Image 2", "Image 3", "Image 4",
             "Image 5", "Image 6", "Image 7", "Image 8", "Image 9"};
 
@@ -86,5 +86,6 @@ public class HomeGridViewAdapter extends BaseAdapter {
             R.drawable.img7, R.drawable.img8,
             R.drawable.img9
     };
-
+    private String [] Titles = {"What is Pornograpy?","Cause of Pornography.","Effects of Pornography.","Article4"
+            ,"Article5","Article6","Article7","Article8","Article9"};
 }
