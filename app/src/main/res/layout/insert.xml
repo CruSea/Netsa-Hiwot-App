@@ -18,8 +18,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="23dp"
-                android:text="Temporary Fragment Layout"
-                android:textSize="24sp" />
+                android:text="Add a Quote"
+                android:textSize="26sp" />
 
             <EditText
                 android:id="@+id/editText2"
@@ -52,7 +52,7 @@
                 android:layout_below="@+id/editText3"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="21dp"
-                android:text="Add Quote" />
+                android:text="Add Quote"/>
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

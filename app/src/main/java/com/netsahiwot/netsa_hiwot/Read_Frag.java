@@ -14,6 +14,6 @@ public class Read_Frag extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.temp_frag, container, false);
+        return inflater.inflate(R.layout.read, container, false);
     }
 }

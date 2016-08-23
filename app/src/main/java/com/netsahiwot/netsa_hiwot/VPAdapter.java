@@ -20,7 +20,7 @@ public class VPAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int postion) {
         switch (postion) {
             case 0:
-                return new Create_Frag();
+                return new Insert_Frag();
             case 1:
                 return new Read_Frag();
             case 2:
@@ -28,7 +28,7 @@ public class VPAdapter extends FragmentPagerAdapter {
             case 3:
                 return new Delete_Frag();
             default:
-                return new Create_Frag();
+                return new Insert_Frag();
         }
     }
 

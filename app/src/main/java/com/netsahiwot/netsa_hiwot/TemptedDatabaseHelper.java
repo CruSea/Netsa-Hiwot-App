@@ -1,4 +1,4 @@
-package com.solodroid.ecommerce;
+package com.netsahiwot.netsa_hiwot;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -49,7 +49,7 @@ public class TemptedDatabaseHelper extends SQLiteOpenHelper {
         //Cursor abc = db.rawQuery("SELECT No from " + TBL_NAME + " where No = " + num, null);
         //if (!abc.moveToFirst()) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("Quote", verse);
+        contentValues.put("Verse", verse);
         contentValues.put("Loc_Auth", source);
         db.insertOrThrow(TBL_NAME, "", contentValues);
         Log.d("Hi Sammie!!! ---", "Finished DBOH addQuote()...");
