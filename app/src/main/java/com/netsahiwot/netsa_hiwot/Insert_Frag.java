@@ -37,35 +37,34 @@ public class Insert_Frag extends Fragment {
         {
             @Override
             public void onClick(View v) {
-                Log.d("Hi Sammie!!!", "AddQuote has been called.");
-                q = quo.getText().toString();
-                l = loc.getText().toString();
-
-                if(!q.matches("")) {
-                    if (!l.matches("")) {
-                        if (helper.addQuote(q, l)) {
-                            Toast.makeText(getContext(), "Quote Inserted!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getContext(), "Quote Inserted!", Toast.LENGTH_SHORT).show();
-                        }
-                    }else
-                    {
-                        loc.setError("Field cannot be left empty.");
-                    }
-                }else
-                {
-                    quo.setError("Field cannot be left empty.");
-                }
-                Log.d("Hi Sammie!!!", "AddQuote has finished executing.");
-                quo.setText("");
-                loc.setText("");
+                AddQuote();
             }
         });
     }
-
-    public void AddQuote(View view)
+    void AddQuote()
     {
+        Log.d("Hi Sammie!!!", "AddQuote has been called.");
+        q = quo.getText().toString();
+        l = loc.getText().toString();
 
+        if(!q.matches("")) {
+            if (!l.matches("")) {
+                if (helper.addQuote(q, l)) {
+                    Toast.makeText(getContext(), "Quote Inserted!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Quote Inserted!", Toast.LENGTH_SHORT).show();
+                }
+            }else
+            {
+                loc.setError("Field cannot be left empty.");
+            }
+        }else
+        {
+            quo.setError("Field cannot be left empty.");
+        }
+        Log.d("Hi Sammie!!!", "AddQuote has finished executing.");
+        quo.setText("");
+        loc.setText("");
     }
 
 }

@@ -30,7 +30,7 @@ public class TemptedDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d("Hi Sammie!!! ---", "Inside TemptedDatabaseHelper onCreate...");
-        db.execSQL("CREATE TABLE " + TBL_NAME + " (" + ID + " INT, " + VERSE
+        db.execSQL("CREATE TABLE " + TBL_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + VERSE
                 + " VARCHAR, " + LOC_AUTH + " VARCHAR)");
         Log.d("Hi Sammie!!! ---", "Finished TemptedDatabaseHelper onCreate...");
     }
