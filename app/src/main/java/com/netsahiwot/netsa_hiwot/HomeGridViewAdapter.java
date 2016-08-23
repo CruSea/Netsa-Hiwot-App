@@ -49,8 +49,7 @@ public class HomeGridViewAdapter extends BaseAdapter {
         txv = (TextView) view.findViewById(R.id.txv);
         imgv.setImageResource(imgs[position]);
         imgv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        txv.setText("A sample paragraph to test the home layout textview and the above image is "
-                + str[position]);
+        txv.setText(Titles[position]);
 
         imgv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +85,6 @@ public class HomeGridViewAdapter extends BaseAdapter {
             R.drawable.img7, R.drawable.img8,
             R.drawable.img9
     };
-    private String [] Titles = {"What is Pornograpy?","Cause of Pornography.","Effects of Pornography.","Article4"
-            ,"Article5","Article6","Article7","Article8","Article9"};
+    private String [] Titles = {"What is Pornograpy?","Cause of Pornography.","Effects of Pornography.","Is Pornography adiction?"
+            ,"Is Pornography a sin?","Article6","Article7","Article8","Article9"};
 }
