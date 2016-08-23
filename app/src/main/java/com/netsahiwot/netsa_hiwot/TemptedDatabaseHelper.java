@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 /**
  * Created by Sammie on 8/16/2016.
@@ -46,19 +45,23 @@ public class TemptedDatabaseHelper extends SQLiteOpenHelper {
     public boolean addQuote(String verse, String source) {
         Log.d("Hi Sammie!!! ---", "Inside TemptedDatabaseHelper addQuote()...");
         SQLiteDatabase db = this.getWritableDatabase();
-        //Cursor abc = db.rawQuery("SELECT No from " + TBL_NAME + " where No = " + num, null);
-        //if (!abc.moveToFirst()) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("Verse", verse);
-        contentValues.put("Loc_Auth", source);
+        contentValues.put(VERSE, verse);
+        contentValues.put(LOC_AUTH, source);
         db.insertOrThrow(TBL_NAME, "", contentValues);
-        Log.d("Hi Sammie!!! ---", "Finished DBOH addQuote()...");
+        Log.d("Hi Sammie!!! ---", "Finished TemptedDatabaseHelper addQuote()...");
         return true;
-        /*} else {
-            Log.d("Hi Sammie!!!",
-                    "Finished TemptedDatabaseHelper addQuote() cause number is already blocked...");
-            return false;
-        }*/
+    }
+
+    public boolean updateQuote(int id, String quote, String loc) {
+        Log.d("Hi Sammie!!! ---", "Inside TemptedDatabaseHelper UpdateQuote()...");
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Verse", quote);
+        contentValues.put("Loc_Auth", loc);
+        db.update(TBL_NAME, contentValues, ID + " = '" + id + "'", null);
+        Log.d("Hi Sammie!!! ---", "Finished TemptedDatabaseHelper UpdateQuote()...");
+        return true;
     }
 
     public Cursor getAllQuote() {
@@ -80,7 +83,7 @@ public class TemptedDatabaseHelper extends SQLiteOpenHelper {
     public boolean rmvVerse(int pos) {
         Log.d("Hi Sammie!!! ---", "Inside TemptedDatabaseHelper rmvVerse()...");
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor s = db.rawQuery("SELECT * FROM "+ TBL_NAME, null);
+        Cursor s = db.rawQuery("SELECT * FROM " + TBL_NAME, null);
         s.moveToPosition(pos);
         int toBR = s.getInt(s.getColumnIndex(ID));
         db.delete(TBL_NAME, ID + " = '" + toBR + "'", null);
@@ -111,8 +114,7 @@ public class TemptedDatabaseHelper extends SQLiteOpenHelper {
             s[0] = allVerse.getString(allVerse.getColumnIndex(VERSE));
             s[1] = allVerse.getString(allVerse.getColumnIndex(LOC_AUTH));
 
-            if (allVerse.getString(allVerse.getColumnIndex(VERSE)) != null)
-            {
+            if (allVerse.getString(allVerse.getColumnIndex(VERSE)) != null) {
                 allVersesAL.add(s);
             }
             allVerse.moveToNext();

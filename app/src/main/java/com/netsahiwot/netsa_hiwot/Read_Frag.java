@@ -56,7 +56,7 @@ public class Read_Frag extends Fragment {
             id = cursor.getInt(cursor.getColumnIndex(ID));
             s[0] = cursor.getString(cursor.getColumnIndex(VERSE));
             s[1] = cursor.getString(cursor.getColumnIndex(LOC_AUTH));
-            display.append("\n" + id + "; " + s[0] + "; " + s[1]);
+            display.append("\n" + id + ". " + s[0] + "; " + s[1]);
             cursor.moveToNext();
         }
         Log.d("Hi Sammie!!!", "DisplayAll has finished executing.");
