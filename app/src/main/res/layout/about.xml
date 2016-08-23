@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ff6600"
-        android:text="@string/About"
+        android:text="@string/about"
         android:layout_below="@id/netsahiwot"
         android:layout_marginTop="10dp"
         android:id="@+id/about_us"/>
