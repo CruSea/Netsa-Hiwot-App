@@ -80,15 +80,12 @@ public class TemptedDatabaseHelper extends SQLiteOpenHelper {
         return numRows;
     }
 
-    public boolean rmvVerse(int pos) {
+    public int rmvVerse(int pos) {
         Log.d("Hi Sammie!!! ---", "Inside TemptedDatabaseHelper rmvVerse()...");
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor s = db.rawQuery("SELECT * FROM " + TBL_NAME, null);
-        s.moveToPosition(pos);
-        int toBR = s.getInt(s.getColumnIndex(ID));
-        db.delete(TBL_NAME, ID + " = '" + toBR + "'", null);
+
         Log.d("Hi Sammie!!! ---", "Finished TemptedDatabaseHelper rmvVerse()...");
-        return true;
+        return db.delete(TBL_NAME, ID + " = '" + pos + "'", null);
     }
 
     public String lookFor(String _id) {

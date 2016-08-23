@@ -40,7 +40,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:ems="10"
-                android:hint="Quote goes here"
+                android:hint="New Quote goes here"
                 android:inputType="textMultiLine" />
 
             <EditText
@@ -52,7 +52,7 @@
                 android:layout_below="@+id/editText2"
                 android:layout_marginTop="30dp"
                 android:ems="10"
-                android:hint="Location / Author"
+                android:hint="New Location / Author"
                 android:inputType="textPersonName" />
 
             <Button
