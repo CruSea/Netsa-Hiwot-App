@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
@@ -25,6 +26,8 @@ public class ActivityTempted extends FragmentActivity {
 
     ViewPager pager;
     PagerSlidingTabStrip tabStrip;
+    TemptedDatabaseHelper tdh;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +37,10 @@ public class ActivityTempted extends FragmentActivity {
         bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.header)));
         bar.setTitle("Tempted");
         bar.setDisplayHomeAsUpEnabled(true);
-
+        Log.d(getClass().getName(), "TemptedDatabaseHelper is about to be initialized...");
+        tdh = new TemptedDatabaseHelper(this);
+        tdh.openDataBase();
+        Log.d(getClass().getName(), "TemptedDatabaseHelper has successfully been initialized...");
         pager = (ViewPager) findViewById(R.id.pager);
         tabStrip = (PagerSlidingTabStrip)findViewById(R.id.tabs);
         pager.setAdapter(new VPAdapter(getSupportFragmentManager(), getApplicationContext()));
