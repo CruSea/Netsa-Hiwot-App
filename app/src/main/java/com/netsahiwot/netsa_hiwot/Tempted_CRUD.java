@@ -5,31 +5,42 @@ import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ActivityTempted extends FragmentActivity {
+import com.astuetz.PagerSlidingTabStrip;
 
+/**
+ * Created by Sammie on 8/25/2016.
+ */
 
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
+public class Tempted_CRUD extends FragmentActivity {
+
+    ViewPager pager;
+    PagerSlidingTabStrip tabStrip;
+    TemptedDatabaseHelper tdh;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.tempted_crud);
 
         ActionBar bar = getActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.header)));
         bar.setTitle("Tempted");
         bar.setDisplayHomeAsUpEnabled(true);
 
-        TemptedFragment tempted = new TemptedFragment();
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(android.R.id.content, tempted).commit();
+        Log.d(getClass().getName(), "TemptedDatabaseHelper is about to be initialized...");
+        tdh = new TemptedDatabaseHelper(this);
+        tdh.openDataBase();
+        Log.d(getClass().getName(), "TemptedDatabaseHelper has successfully been initialized...");
 
+        pager = (ViewPager) findViewById(R.id.pager);
+        tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        pager.setAdapter(new VPAdapter(getSupportFragmentManager(), getApplicationContext()));
+        tabStrip.setViewPager(pager);
     }
 
     @Override

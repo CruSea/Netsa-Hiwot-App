@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sammie on 8/16/2016.
@@ -76,7 +77,7 @@ public class TemptedDatabaseHelper extends SQLiteOpenHelper {
         if (!dbFile.exists()) {
             try {
                 CopyDataBaseFromAsset();
-                System.out.println("Copying success from Assets folder");
+                Log.d(getClass().getName(), "Copying success from Assets folder");
             } catch (IOException e) {
                 throw new RuntimeException("Error creating source database", e);
             }
@@ -161,25 +162,37 @@ public class TemptedDatabaseHelper extends SQLiteOpenHelper {
             return null;
     }
 
-    public ArrayList<String[]> getAllVerses() {
+    public ArrayList<ArrayList<String>> getAllVerses() {
         Log.d("Hi Sammie!!! ---", "Inside TemptedDatabaseHelper <ArrayList> getAllVerses()...");
-        ArrayList<String[]> allVersesAL = new <String[]>ArrayList();
+        ArrayList<ArrayList<String>> allVersesAL = new ArrayList<ArrayList<String>>();
+        ArrayList<String> subAL;
         Log.d("Hi Sammie!!! ---", "Formed an arraylist object...");
         Cursor allVerse = getAllQuote();
         Log.d("Hi Sammie!!! ---", "Method getAllQuote() has brought a Data...");
         allVerse.moveToFirst();
-        Log.d("Hi Sammie!!! ---", "Moved to the first of the arraylist...");
-        String[] s = new String[2];
-        while (!allVerse.isAfterLast()) {
-            s[0] = allVerse.getString(allVerse.getColumnIndex(VERSE));
-            s[1] = allVerse.getString(allVerse.getColumnIndex(LOC_AUTH));
-
-            if (allVerse.getString(allVerse.getColumnIndex(VERSE)) != null) {
-                allVersesAL.add(s);
-            }
-            allVerse.moveToNext();
-        }
+        Log.d("Hi Sammie!!! ---", "Moved to the first of the cursor...");
+        do {
+            subAL = new ArrayList<>();
+            subAL.clear();
+            subAL.add(allVerse.getString(allVerse.getColumnIndex(VERSE)));
+            subAL.add(allVerse.getString(allVerse.getColumnIndex(LOC_AUTH)));
+            Log.d("Content of subAL", subAL + "");
+            allVersesAL.add(subAL);
+        } while (allVerse.moveToNext());
         Log.d("Hi Sammie!!! ---", "Finished TemptedDatabaseHelper <ArrayList> getAllVerses()...");
+        // Only here for testing purpose
+/*        for (List<String> li : allVersesAL) {
+            try {
+                Log.d(getClass().getMethod("getAllVerses", null).getName(), "Inside the for loop...");
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            for (String s : li) {
+                Log.d("getAllVerses", "Inside the second for loop...");
+                Log.d("Testing arraylist...", s + "  ::  ");
+            }
+        }
+        */
         return allVersesAL;
     }
 }

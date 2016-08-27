@@ -22,7 +22,7 @@ public class Insert_Frag extends Fragment {
     TemptedDatabaseHelper helper;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.insert, container, false);
     }
 
