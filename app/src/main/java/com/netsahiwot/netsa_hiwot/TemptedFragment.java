@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -27,13 +26,11 @@ public class TemptedFragment extends Fragment {
     private static ImageView topImg;
     private static TextView txtQuote, txtAuth;
     private static ImageButton prev, nxt;
-    private static int total;
+    private static int total, rand, back;
     private static ArrayList<ArrayList<String>> current;
-    private static LinkedHashSet<Integer> hs;
-    private static int rand, back;
-    private static LinkedList<Integer> ll, prevLL;
+    private static LinkedHashSet<Integer> lhs;
+    private static LinkedList<Integer> ll;
     private static ListIterator desIter;
-    private static Iterator<Integer> iterator;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,11 +52,12 @@ public class TemptedFragment extends Fragment {
         total = tdh.numberOfRows();
         //randomly selects a number from 0 to total available quotes
         rand = (int) (Math.random() * total);
-        hs.add(rand);
+        lhs.add(rand);
         Log.d("Hi Sammie", "The generated random no is " + rand);
         //calls a method in TemptedDatabaseHelper that returns an ArrayList of Arraylists
         current = tdh.getAllVerses();
         setQuote(rand);
+        // Disables the prev button cause we can't go backwards initially
         prev.setEnabled(false);
         ll = new LinkedList<Integer>();
         desIter = ll.listIterator();
@@ -68,14 +66,19 @@ public class TemptedFragment extends Fragment {
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Checks if there is an element in the LinkedList for us to go back
                 if (desIter.hasNext() && desIter != null) {
+                    //Gets the int value from the next object
                     back = (int) desIter.next();
+                    // Conditional inserted inorder not to display the currently active quote
+                    // again when the user navigates backward
                     if (back == rand) {
                         if (desIter.hasNext()) {
+                            // Skips the current value and jumps to next value
                             back = (int) desIter.next();
                             setQuote(back);
                         }
-                    }else{
+                    } else {
                         setQuote(back);
                     }
                 }
@@ -86,35 +89,45 @@ public class TemptedFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 rand = (int) (Math.random() * total);
-                hs.add(rand);
+                // Removes an occurance of a value same as the random number to make the value of the
+                // random number at the last of the LinkedHashSet. This is useful for the naavigation
+                // to the previous quote
+                lhs.remove(rand);
+                // Adds the value of the random number to the last of the LinkedHashSet
+                lhs.add(rand);
                 setQuote(rand);
                 refreshLinkedList();
+                // Enables the prev button since we moved forward and is possible for us to
+                // navigate forward
                 if (!prev.isEnabled())
                     prev.setEnabled(true);
             }
         });
     }
 
-
+    // Copies all the contents of the LinkedHashSet into the LinkedList
     private void refreshLinkedList() {
         ll = new LinkedList<Integer>();
-        for (int temp : hs) {
+        for (int temp : lhs) {
             ll.add(temp);
         }
         desIter = ll.listIterator();
+        // Reverses the order of the items in the LinkedList for them to be navigated backwards using
+        // the prev buttom
         Collections.reverse(ll);
     }
 
+    // Sets the quote and verse chosen on the textviews
     private void setQuote(int rand) {
         txtQuote.setText("\"" + current.get(rand).get(0) + "\"");
         txtAuth.setText(current.get(rand).get(1));
     }
 
+    // Initializes  all the variables and objects to be used in the fragment
     void init(View view) {
         Log.d(getClass().getName(), "Started the init method...");
 
-        hs = new LinkedHashSet<Integer>();
-        iterator = hs.iterator();
+        lhs = new LinkedHashSet<Integer>();
         topImg = (ImageView) view.findViewById(R.id.topImg);
         txtQuote = (TextView) view.findViewById(R.id.textQuote);
         txtAuth = (TextView) view.findViewById(R.id.textAuth);

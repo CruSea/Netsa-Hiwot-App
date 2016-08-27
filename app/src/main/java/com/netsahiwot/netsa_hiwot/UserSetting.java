@@ -65,7 +65,6 @@ public class UserSetting extends PreferenceActivity {
                         false);
                 return new TimePickerDialog(this, timePickerListener, hour, minute,
                         false);
-
         }
         return null;
     }
