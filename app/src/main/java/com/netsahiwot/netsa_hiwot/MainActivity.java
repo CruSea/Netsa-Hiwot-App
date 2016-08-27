@@ -2,7 +2,9 @@ package com.netsahiwot.netsa_hiwot;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.AlarmManager;
 import android.app.Fragment;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -21,13 +23,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+//import android.support.v7.app.NotificationCompat;
 
 @SuppressLint("NewApi")
 public class MainActivity extends FragmentActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-
+   // private static final int RESULT_SETTINGS = 1;
     // nav drawer title
     private CharSequence mDrawerTitle;
 
@@ -40,13 +44,19 @@ public class MainActivity extends FragmentActivity {
 
     private ArrayList<NavDrawerItem> navDrawerItems;
     private AdapterNavDrawerList adapter;
-
+    CustomNotification cn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_drawer_main);
+        //cn = new CustomNotification();
+        //UserSetting us = new UserSetting();
+        //us.onTimeSet();
+Notificationpush();
 
+        Intent i = new Intent(this,UserSetting.class);
+        startActivity(i);
 
         mTitle = mDrawerTitle = getTitle();
 
@@ -147,9 +157,32 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.menu_settings) {
+            Intent i = new Intent(this, ActivityTempted.class);
+            startActivityForResult(i, RESULT_SETTINGS);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }*/
+
+   @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -161,12 +194,14 @@ public class MainActivity extends FragmentActivity {
         }
         // Handle action bar actions click
         switch (item.getItemId()) {
-
+            case R.id.menu_settings :
+                Intent i = new Intent(this,UserSetting.class);
+                startActivity(i);
             default:
                 return super.onOptionsItemSelected(item);
+
         }
     }
-
     /*
      * * Called when invalidateOptionsMenu() is triggered
      */
@@ -174,7 +209,7 @@ public class MainActivity extends FragmentActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // if nav drawer is opened, hide the action items
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.ic_menu).setVisible(!drawerOpen);
+//        menu.findItem(R.id.ic_menu).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -273,4 +308,25 @@ public class MainActivity extends FragmentActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+   public void Notificationpush(){
+
+        UserSetting us = new UserSetting();
+        int x = us.hour;
+        int y =us.minute;
+        Calendar Cal = Calendar.getInstance();
+        Cal.setTimeInMillis(System.currentTimeMillis());
+        Cal.set(Calendar.HOUR_OF_DAY, x);
+        Cal.set(Calendar.MINUTE, y);
+        Cal.set(Calendar.SECOND, 1);
+
+
+        Intent intent = new Intent(getApplicationContext(), CustomNotification.class);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager =(AlarmManager)getSystemService(ALARM_SERVICE);
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,Cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
+
+    }
 }
