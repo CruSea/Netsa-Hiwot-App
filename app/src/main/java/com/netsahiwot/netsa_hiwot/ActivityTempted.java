@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,7 +13,7 @@ import android.view.MenuItem;
 
 public class ActivityTempted extends FragmentActivity {
 
-
+    Fragment tempted;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
@@ -25,7 +26,7 @@ public class ActivityTempted extends FragmentActivity {
         bar.setTitle("Tempted");
         bar.setDisplayHomeAsUpEnabled(true);
 
-        TemptedFragment tempted = new TemptedFragment();
+        tempted = new TemptedFragment();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(android.R.id.content, tempted).commit();

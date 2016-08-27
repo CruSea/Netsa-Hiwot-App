@@ -1,7 +1,6 @@
 package com.netsahiwot.netsa_hiwot;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,39 +26,36 @@ public class Insert_Frag extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        quo = (EditText)view.findViewById(R.id.editText2);
-        loc = (EditText)view.findViewById(R.id.editText3);
+        quo = (EditText) view.findViewById(R.id.editText2);
+        loc = (EditText) view.findViewById(R.id.editText3);
         helper = new TemptedDatabaseHelper(getContext());
-        add = (Button)view.findViewById(R.id.button2);
-        add.setOnClickListener(new View.OnClickListener()
-        {
+        add = (Button) view.findViewById(R.id.button2);
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AddQuote();
             }
         });
     }
-    void AddQuote()
-    {
+
+    void AddQuote() {
         Log.d("Hi Sammie!!!", "AddQuote has been called.");
         q = quo.getText().toString();
         l = loc.getText().toString();
 
-        if(!q.matches("")) {
+        if (!q.matches("")) {
             if (!l.matches("")) {
                 if (helper.addQuote(q, l)) {
                     Toast.makeText(getContext(), "Quote Inserted!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(), "Quote Inserted!", Toast.LENGTH_SHORT).show();
                 }
-            }else
-            {
+            } else {
                 loc.setError("Field cannot be left empty.");
             }
-        }else
-        {
+        } else {
             quo.setError("Field cannot be left empty.");
         }
         Log.d("Hi Sammie!!!", "AddQuote has finished executing.");
