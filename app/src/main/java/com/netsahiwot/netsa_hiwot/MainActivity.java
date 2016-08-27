@@ -55,8 +55,7 @@ public class MainActivity extends FragmentActivity {
         //us.onTimeSet();
 Notificationpush();
 
-        Intent i = new Intent(this,UserSetting.class);
-        startActivity(i);
+        
 
         mTitle = mDrawerTitle = getTitle();
 
