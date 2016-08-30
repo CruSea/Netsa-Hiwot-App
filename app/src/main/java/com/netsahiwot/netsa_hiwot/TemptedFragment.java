@@ -26,11 +26,13 @@ public class TemptedFragment extends Fragment {
     private static ImageView topImg;
     private static TextView txtQuote, txtAuth;
     private static ImageButton prev, nxt;
-    private static int total, rand, back;
+    private static int total, rand, back, id;
     private static ArrayList<ArrayList<String>> current;
     private static LinkedHashSet<Integer> lhs;
     private static LinkedList<Integer> ll;
     private static ListIterator desIter;
+    private static String mode = null;
+    private static Bundle bun;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,22 +49,38 @@ public class TemptedFragment extends Fragment {
         Log.d(getClass().getName(), "TemptedDatabaseHelper is about to be initialized...");
         tdh.openDataBase();
         Log.d(getClass().getName(), "TemptedDatabaseHelper has successfully been initialized...");
+        bun = getArguments();
 
-        //gets the total number of quotes available in the database
-        total = tdh.numberOfRows();
-        //randomly selects a number from 0 to total available quotes
-        rand = (int) (Math.random() * total);
-        lhs.add(rand);
-        Log.d("Hi Sammie", "The generated random no is " + rand);
-        //calls a method in TemptedDatabaseHelper that returns an ArrayList of Arraylists
-        current = tdh.getAllVerses();
-        setQuote(rand);
-        // Disables the prev button cause we can't go backwards initially
-        prev.setEnabled(false);
-        ll = new LinkedList<Integer>();
-        desIter = ll.listIterator();
-        //refreshLinkedList();
+        mode = bun.getString("mode");
+        // Checks in what mode that the intent that created the activity wants to open this fragment
+        if (mode.equals("NotifTempted")) {
+            Log.d("Hi Sammie!!!", "I got the gift from the pending intent!!!!!!");
 
+            id = bun.getInt("id");
+            current = tdh.getAllVerses();
+            setQuote(id);
+            // Disables the previous and next buttons to inhibit navigation since this fragment has
+            // been created from the notification
+            prev.setVisibility(View.GONE);
+            nxt.setVisibility(View.GONE);
+
+        } else if (mode.equals("normal")) {
+            Log.d("Hi Sammie!!!", "I didn't get the mode from the pending intent :-(");
+            //gets the total number of quotes available in the database
+            total = tdh.numberOfRows();
+            //randomly selects a number from 0 to total available quotes
+            rand = (int) (Math.random() * total);
+            lhs.add(rand);
+            Log.d("Hi Sammie", "The generated random no is " + rand);
+            //calls a method in TemptedDatabaseHelper that returns an ArrayList of Arraylists
+            current = tdh.getAllVerses();
+            setQuote(rand);
+            // Disables the prev button cause we can't go backwards initially
+            prev.setEnabled(false);
+            ll = new LinkedList<Integer>();
+            desIter = ll.listIterator();
+            //refreshLinkedList();
+        }
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +152,9 @@ public class TemptedFragment extends Fragment {
         tdh = new TemptedDatabaseHelper(getContext());
         nxt = (ImageButton) view.findViewById(R.id.btn_next);
         prev = (ImageButton) view.findViewById(R.id.btn_prev);
+        bun = new Bundle();
 
         Log.d(getClass().getName(), "Started the init method...");
     }
+
 }

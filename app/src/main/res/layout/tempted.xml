@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="20dp"
-        android:src="@mipmap/author" />
+        android:src="@mipmap/freedom" />
 
     <ScrollView
         android:layout_width="match_parent"

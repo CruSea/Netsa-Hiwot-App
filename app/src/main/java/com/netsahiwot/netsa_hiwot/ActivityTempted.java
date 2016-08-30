@@ -16,6 +16,7 @@ public class ActivityTempted extends FragmentActivity {
     Fragment tempted;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    Bundle bundle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,16 @@ public class ActivityTempted extends FragmentActivity {
         bar.setDisplayHomeAsUpEnabled(true);
 
         tempted = new TemptedFragment();
+
+        bundle = new Bundle();
+        if (getIntent().hasExtra("mode")) {
+            bundle.putString("mode", getIntent().getExtras().getString("mode"));
+            bundle.putInt("id", getIntent().getExtras().getInt("id"));
+        } else
+            bundle.putString("mode", "normal");
+
+        tempted.setArguments(bundle);
+
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(android.R.id.content, tempted).commit();

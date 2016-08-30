@@ -33,7 +33,7 @@ public class  AlarmTask implements Runnable{
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
 
         am.setRepeating(AlarmManager.RTC_WAKEUP, date.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-        Log.d("Hi sammie!!!", "AlarmTask has setRepeating...");
+        Log.d("Hi sammie!!!", "AlarmTask...end of the run method");
 
     }
 }

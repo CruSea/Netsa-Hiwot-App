@@ -16,7 +16,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Random;
 
-
 /**
  * Created by Sammie on 19/08/2015.
  */
@@ -34,12 +33,7 @@ public class NotifyService extends Service {
     private Random rand;
     private static ArrayList<ArrayList<String>> current;
     SharedPreferences preferences;
-    /* I did it
-    private Quote qte;
-    private ArrayList<Quote> imageArry = new ArrayList<Quote>();*/
     public static final String INTENT_NOTIFY = "com.netsahiwot.netsa_hiwot.INTENT_TEMPTED";
-    // private NotificationManager mNM;
-
 
     @Override
     public void onCreate() {
@@ -68,7 +62,8 @@ public class NotifyService extends Service {
 
         tdh = new TemptedDatabaseHelper(this);
         rand = new Random();
-        int r = (int) rand.nextFloat() * tdh.numberOfRows();
+        // Generates the random number between 0 and total value of the elements
+        int r = (int) (rand.nextFloat() * tdh.numberOfRows());
         preferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
@@ -83,13 +78,13 @@ public class NotifyService extends Service {
             current = tdh.getAllVerses();
             CharSequence text = current.get(r).get(0);
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setSmallIcon(R.mipmap.freedom)
                     .setContentTitle(title)
                     .setContentText(text)
                     .setAutoCancel(true);
             Intent intent1 = new Intent(this.getApplicationContext(),
                     ActivityTempted.class);
-            // Remember to work in this section for the other activity to get the extras
+
             intent1.putExtra("id", r);
             intent1.putExtra("mode", "NotifTempted");
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
@@ -102,8 +97,8 @@ public class NotifyService extends Service {
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.notify(NOTIFICATION, mBuilder.build());
 
-    }
+        }
 
-    stopSelf();
+        stopSelf();
     }
 }

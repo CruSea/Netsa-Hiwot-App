@@ -45,7 +45,7 @@ public class UserSetting extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().setStatusBarColor(getResources().getColor(R.color.header));
+            //getWindow().setStatusBarColor(getResources().getColor(R.color.header));
         }
         addPreferencesFromResource(R.xml.settings);
 
