@@ -1,51 +1,73 @@
 package com.netsahiwot.netsa_hiwot;
 
-import android.app.ActionBar;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.view.MenuItem;
+import android.text.format.DateFormat;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by Amanuel on 25/8/2016.
  */
 public class UserSetting extends PreferenceActivity {
-    private SharedPreferences sharedPreferences;
-    private Preference timeset;
+
+    private SharedPreferences sharedPrefs;
+    private Preference mytime;
+    private long summary;
     static final int DIALOG_ID = 10;
-    public static int hour;
-    public static int minute;
 
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        // Allow super to try and create a view first
+        final View result = super.onCreateView(name, context, attrs);
+        if (result != null) {
+            return result;
+        }
+        return null;
+    }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.setting);
-        ActionBar bar = getActionBar();
-        //bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.header)));
-        bar.setDisplayHomeAsUpEnabled(true);
-        bar.setTitle("Settings");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.header));
+        }
+        addPreferencesFromResource(R.xml.settings);
 
-        sharedPreferences = PreferenceManager
+        sharedPrefs = PreferenceManager
                 .getDefaultSharedPreferences(UserSetting.this);
-        timeset = (Preference) findPreference("time_set");
+        mytime = findPreference("mytime");
+        summary = sharedPrefs.getLong("userTime", 0);
+        if (summary != 0) {
+            mytime.setSummary(DateFormat.getTimeFormat(getBaseContext())
+                    .format(summary));
+        } else {
+            mytime.setSummary("");
+        }
 
-        timeset.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        mytime.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
 
                 showDialog(DIALOG_ID);
 
-
                 return false;
             }
         });
-
 
     }
 
@@ -53,32 +75,21 @@ public class UserSetting extends PreferenceActivity {
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case DIALOG_ID:
-                int hour, minute;
+                int hour,
+                        minute;
                 final Calendar c = Calendar.getInstance();
-               /* if (summary != 0) {
+                if (summary != 0) {
                     c.setTimeInMillis(sharedPrefs.getLong("userTime",
                             System.currentTimeMillis()));
-                }*/
+                }
                 hour = c.get(Calendar.HOUR_OF_DAY);
                 minute = c.get(Calendar.MINUTE);
                 TimePickerDialog tpk = new TimePickerDialog(this, timePickerListener, hour, minute,
                         false);
-                return new TimePickerDialog(this, timePickerListener, hour, minute,
-                        false);
+                return tpk;
+
         }
         return null;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                // app icon in action bar clicked; goto parent activity.
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
@@ -86,28 +97,21 @@ public class UserSetting extends PreferenceActivity {
         public void onTimeSet(TimePicker view, int pickerHour,
                               int pickerMinute) {
             Calendar Cal = Calendar.getInstance();
-            hour = pickerHour;
-            minute = pickerMinute;
+            int hour = pickerHour;
+            int minute = pickerMinute;
 
-        /*  Cal.setTimeInMillis(System.currentTimeMillis());
+            Cal.setTimeInMillis(System.currentTimeMillis());
             Cal.set(Calendar.HOUR_OF_DAY, hour);
             Cal.set(Calendar.MINUTE, minute);
-            Cal.set(Calendar.SECOND, 1);
+            Cal.set(Calendar.SECOND, 0);
 
-
-            Intent intent = new Intent(getApplicationContext(), CustomNotification.class);
-
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100,intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmManager alarmManager =(AlarmManager)getSystemService(ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,Cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
-            //Editor e = sharedPrefs.edit();
-            //  e.putLong("userTime", Cal.getTimeInMillis());
-            // e.commit();
-
-            timeset.setSummary(DateFormat.getTimeFormat(getBaseContext())
+            SharedPreferences.Editor e = sharedPrefs.edit();
+            e.putLong("userTime", Cal.getTimeInMillis());
+            e.commit();
+            mytime.setSummary(DateFormat.getTimeFormat(getBaseContext())
                     .format(new Date(Cal.getTimeInMillis())));
-*/
-            //new AlarmTask(UserSettingActivity.this, Cal).run();
+            Log.d("Hi sammie!!!", "UserSetting onTimeSet()..." + Cal.toString());
+            new AlarmTask(UserSetting.this, Cal).run();
         }
     };
 }
