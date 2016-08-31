@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TimePicker;
@@ -47,6 +48,7 @@ public class UserSetting extends PreferenceActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             //getWindow().setStatusBarColor(getResources().getColor(R.color.header));
         }
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         addPreferencesFromResource(R.xml.settings);
 
         sharedPrefs = PreferenceManager
@@ -114,4 +116,16 @@ public class UserSetting extends PreferenceActivity {
             new AlarmTask(UserSetting.this, Cal).run();
         }
     };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
