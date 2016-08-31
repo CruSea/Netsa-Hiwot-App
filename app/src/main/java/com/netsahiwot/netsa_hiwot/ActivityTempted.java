@@ -1,6 +1,8 @@
 package com.netsahiwot.netsa_hiwot;
 
 import android.app.ActionBar;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class ActivityTempted extends FragmentActivity {
 
@@ -44,10 +47,18 @@ public class ActivityTempted extends FragmentActivity {
 
     }
 
+    private void copyToClipBoard(String qte) {
+
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("text", qte);
+        clipboard.setPrimaryClip(clip);
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.tempset, menu);
         return true;
     }
 
@@ -63,7 +74,11 @@ public class ActivityTempted extends FragmentActivity {
                 this.finish();
                 overridePendingTransition(R.anim.open_main, R.anim.close_next);
                 return true;
-
+            case R.id.copy2clip:
+                String txtcpid = TemptedFragment.txt2copy;
+                copyToClipBoard(txtcpid);
+                Toast.makeText(getApplicationContext(), "Quote copied!", Toast.LENGTH_SHORT).show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

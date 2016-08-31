@@ -33,6 +33,7 @@ public class TemptedFragment extends Fragment {
     private static ListIterator desIter;
     private static String mode = null;
     private static Bundle bun;
+    static String txt2copy;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -139,6 +140,7 @@ public class TemptedFragment extends Fragment {
     private void setQuote(int rand) {
         txtQuote.setText("\"" + current.get(rand).get(0) + "\"");
         txtAuth.setText(current.get(rand).get(1));
+        txt2copy = current.get(rand).get(0) + ".\n" + current.get(rand).get(1);
     }
 
     // Initializes  all the variables and objects to be used in the fragment
